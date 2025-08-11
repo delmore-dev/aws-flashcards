@@ -32,56 +32,6 @@ Flask Flashcards App
 Overview
 The Flask app fetches flashcards from the above API, organizes them by category, and serves them via several endpoints and a web UI.
 
-Categories Supported
-Concepts
-
-Compute
-
-Storage
-
-Database
-
-Security
-
-Management
-
-Containers
-
-Migration
-
-Networking and content delivery
-
-Machine learning
-
-Devtools
-
-IoT
-
-Frontend
-
-End user computing
-
-Analytics
-
-Application integration
-
-Business applications
-
-Satellite
-
-Quantum
-
-Robotics
-
-Blockchain
-
-Game development
-
-Media services
-
-Financial services
-
-Customer engagement
 
 Flask Routes
 Route	Description
