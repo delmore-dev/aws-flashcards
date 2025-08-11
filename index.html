@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS C03 Flashcards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }   
+        .flashcard {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .flashcard h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .flashcard p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .flashcard button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .flashcard button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .flashcard h2 {
+                font-size: 20px;
+            }
+            .flashcard p {
+                font-size: 16px;
+            }
+            .flashcard button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS Flashcards</h1>
+        <div id="flashcard-container">
+            {% for flashcard in flashcards %}
+            <div class="flashcard">
+                <h2>{{ flashcard.item }}</h2>
+                <p class="definition" style="display: none;">{{ flashcard.definition }}</p>
+                <button class="show-definition">Show Definition</button>
+            </div>
+            {% endfor %}
+        </div>
+        <button id="next-flashcards">Next Cards</button>
+    </div>
+    <script>
+        const flashcards = document.querySelectorAll('.flashcard');
+        const nextButton = document.getElementById('next-flashcards');
+        currentIndex = Math.floor(Math.random() * flashcards.length);
+        function showFlashcards() {
+            flashcards.forEach((card, index) => {
+                card.style.display = (index >= currentIndex && index < currentIndex + 3) ? 'block' : 'none';
+            });
+        }
+        function showDefinition(event) {
+            const definition = event.target.previousElementSibling;
+            if (definition.style.display === 'none') {
+                definition.style.display = 'block';
+                event.target.textContent = 'Hide Definition';
+            } else {
+                definition.style.display = 'none';
+                event.target.textContent = 'Show Definition';
+            }
+        }
+        flashcards.forEach(card => {
+            const button = card.querySelector('.show-definition');
+            button.addEventListener('click', showDefinition);
+        });
+        nextButton.addEventListener('click', () => {
+            currentIndex += 3;
+            if (currentIndex >= flashcards.length) {
+                currentIndex = 0; 
+            }   
+            showFlashcards();
+        });
+        showFlashcards(); 
+    </script>
+</body>
+</html>
